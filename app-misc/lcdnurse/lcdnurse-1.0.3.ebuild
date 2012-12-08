@@ -9,11 +9,7 @@ inherit eutils
 DESCRIPTION="Tool to fix stuck pixel in a LCD display"
 HOMEPAGE="http://en.congelli.eu/prog_info_lcdnurse.html"
 SRC_URI="http://en.congelli.eu/download/lcdnurse/${P}.tar.gz"
-LICENSE=""
-
-SLOT="0"
-KEYWORDS="~amd64"
-IUSE=""
+LICENSE="GPL-3"
 
 RESTRICT="fetch"
 
