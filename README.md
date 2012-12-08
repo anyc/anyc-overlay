@@ -1,4 +1,4 @@
 anyc-overlay
 ============
 
-Testing ebuilds
+My personal Gentoo overlay
