@@ -6,13 +6,13 @@ EAPI=5
 
 inherit eutils gnome2
 
-DESCRIPTION="A SyncML desktop client and server"
+DESCRIPTION="SyncEvolution synchronizes personal information management (PIM) data via various protocols"
 HOMEPAGE="http://syncevolution.org/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="akonadi sqlite +gtk +eds bluetooth +gnome keyring kwallet xmlrpc"
+IUSE="akonadi sqlite gtk eds bluetooth +gnome keyring kwallet xmlrpc"
 
 SRC_URI="http://downloads.syncevolution.org/syncevolution/sources/${P}.tar.gz"
 
@@ -44,15 +44,6 @@ DEPEND="${RDEPEND}
 DOCS="README NEWS AUTHORS HACKING"
 
 REQUIRED_USE="xmlrpc? ( sqlite )"
-
-#src_prepare() {
-#	epatch "${FILESDIR}/fix-akonadi-build.patch"
-	# patches from bugs.meego.com #20370
-#	epatch "${FILESDIR}/do-not-check-for-or-use-gtk-builder-convert.patch"
-#	epatch "${FILESDIR}/do-not-check-for-libglade-because-it-is-not-used.patch"
-	# additional patch to remove the usage and check for gtk-builder-convert
-#	epatch "${FILESDIR}/do-not-use-gtk-builder-convert.patch"
-#}
 
 pkg_setup() {
 	G2CONF="--with-rst2man=/usr/bin/rst2man.py
