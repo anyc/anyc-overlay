@@ -21,6 +21,7 @@ RDEPEND=">=gnome-base/gconf-2:2
 	>=net-libs/libsoup-2.4:2.4
 	>=sys-apps/dbus-1.2
 	x11-libs/libnotify
+	dev-util/cppunit
 	keyring? ( >=gnome-base/gnome-keyring-2.20 )
 	dev-python/twisted-web
 	>=dev-libs/boost-1.35
