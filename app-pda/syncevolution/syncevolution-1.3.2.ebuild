@@ -72,3 +72,7 @@ pkg_setup() {
 		G2CONF="${G2CONF} --enable-gui=no"
 	fi
 }
+
+src_prepare() {
+	epatch "${FILESDIR}/syncevolution-sqlite-header.patch"
+}
