@@ -35,9 +35,9 @@ PYTHON_DEPEND="2"
 S="${WORKDIR}/${PN/-/_}"
 
 src_prepare(){
-	sed -i -e "s#^DIR_PATH = .*\$#DIR_PATH = '/opt/${PN}'#" \
-		-e 's#/usr/bin/env python#/usr/bin/python2#' *.py \
-		|| die "sed failed"
+# 	sed -i -e "s#^DIR_PATH = .*\$#DIR_PATH = '/opt/${PN}'#" \
+# 		-e 's#/usr/bin/env python#/usr/bin/python2#' *.py \
+# 		|| die "sed failed"
 	find -name "*.jpg" -exec rm -f {} \;
 	find -name "*.png" -exec rm -f {} \;
 }
