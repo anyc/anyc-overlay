@@ -53,6 +53,7 @@ src_prepare() {
 		-e '/libsyslog_ng_crypto_la_LIBADD/s/$/ -lssl -lcrypto/' \
 		lib/Makefile.am || die
 
+	# see https://bugzilla.redhat.com/show_bug.cgi?id=833551
 	sed -i 's/ExecStartPre=/#ExecStartPre=/' contrib/systemd/syslog-ng.service || die
 
 	eautoreconf
