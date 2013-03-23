@@ -2,11 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
-PYTHON_DEPEND="2:2.6"
-
-inherit cmake-utils multilib python
+inherit cmake-utils
 
 DESCRIPTION="lensfun: A library for rectifying and simulating photographic lens distortions"
 HOMEPAGE="http://lensfun.berlios.de/"
@@ -25,15 +23,10 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.2.6-auxfun.patch
-	"${FILESDIR}"/${PN}-0.2.5_p153-build.patch
+	"${FILESDIR}"/${PN}-0.2.7-build.patch
 	)
 
 DOCS=( README docs/mounts.txt )
-
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
 
 src_configure() {
 	local mycmakeargs=(
