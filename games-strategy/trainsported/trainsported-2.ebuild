@@ -4,31 +4,46 @@
 
 EAPI=5
 
-inherit games gnome2-utils
+if [ "${PV}" == "9999" ]; then
+	MY_INHERIT="git-2"
+fi
+
+inherit games gnome2-utils $MY_INHERIT
 
 MY_PN=trAInsported
 
 DESCRIPTION="Program an AI to control trains"
 HOMEPAGE="http://trainsportedgame.no-ip.org/"
-SRC_URI="http://trainsportedgame.no-ip.org/download/${MY_PN}${PV}.love -> ${PN}.zip
-	http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
 LICENSE="trainsported DoWhatTheFuckYouWant UbuntuFontLicense-1.0"
 
-SLOT="0"
-KEYWORDS="~x86 ~amd64"
+if [ "${PV}" == "9999" ]; then
+	EGIT_REPO_URI="https://github.com/Germanunkol/${MY_PN}.git"
+	SRC_URI="http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
+	KEYWORDS=""
+else
+	SRC_URI="http://trainsportedgame.no-ip.org/download/${MY_PN}${PV}.love -> ${PN}.zip
+		http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
+	KEYWORDS="~amd64 ~x86"
+fi
 
+SLOT="0"
 IUSE=""
 RDEPEND=">=games-engines/love-0.8"
 
 S=${WORKDIR}
 
 src_unpack() {
-	unpack ${PN}.zip
+	if [ "${PV}" == "9999" ]; then
+		EGIT_NOUNPACK=1
+		git-2_src_unpack
+	else
+		unpack ${PN}.zip
+	fi
 }
 
 src_install() {
 	dodoc Documentation.* README.md MakingMaps.md TODO.md
-	rm *.html *.md
+	rm -f *.html *.md *.txt
 
 	insinto "${GAMES_DATADIR}/${PN}"
 	doins -r *
