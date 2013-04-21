@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit distutils flag-o-matic
+inherit distutils
 
 DESCRIPTION="Library for working with XMP metadata stored in many different file formats"
 HOMEPAGE="http://code.google.com/p/python-xmp-toolkit/"
@@ -19,6 +19,6 @@ RDEPEND="media-libs/exempi"
 
 src_install() {
 	distutils_src_install
-	
+
 	use doc && dohtml -r docs/html/*
 }
