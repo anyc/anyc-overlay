@@ -4,11 +4,11 @@
 
 EAPI=5
 
-if [ "${PV}" == "9999" ]; then
+if [[ "${PV}" == "9999" ]]; then
 	MY_INHERIT="git-2"
 fi
 
-inherit games gnome2-utils $MY_INHERIT
+inherit $MY_INHERIT games
 
 MY_PN=trAInsported
 
@@ -16,7 +16,7 @@ DESCRIPTION="Program an AI to control trains"
 HOMEPAGE="http://trainsportedgame.no-ip.org/"
 LICENSE="trainsported DoWhatTheFuckYouWant UbuntuFontLicense-1.0"
 
-if [ "${PV}" == "9999" ]; then
+if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/Germanunkol/${MY_PN}.git"
 	SRC_URI="http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
 	KEYWORDS=""
@@ -28,12 +28,12 @@ fi
 
 SLOT="0"
 IUSE=""
-RDEPEND=">=games-engines/love-0.8"
+RDEPEND="games-engines/love:0"
 
 S=${WORKDIR}
 
 src_unpack() {
-	if [ "${PV}" == "9999" ]; then
+	if [[ "${PV}" == "9999" ]]; then
 		EGIT_NOUNPACK=1
 		git-2_src_unpack
 	else
@@ -43,31 +43,20 @@ src_unpack() {
 
 src_install() {
 	dodoc Documentation.* README.md MakingMaps.md TODO.md
-	rm -f *.html *.md *.txt
 
-	insinto "${GAMES_DATADIR}/${PN}"
+	insinto "${GAMES_DATADIR}/love/${PN}"
 	doins -r *
+	rm -f "${D}"/*.html "${D}"/*.md "${D}"/*.txt || die
 
 	doicon "${DISTDIR}/trainsported.png"
-	games_make_wrapper ${PN} "love ${GAMES_DATADIR}/${PN}"
+	games_make_wrapper ${PN} "love ${GAMES_DATADIR}/love/${PN}"
 	make_desktop_entry ${PN} ${MY_PN}
 
 	prepgamesdirs
-}
-
-pkg_preinst() {
-	games_pkg_preinst
-	gnome2_icon_savelist
 }
 
 pkg_postinst() {
 	games_pkg_postinst
 	elog "${MY_PN} AI files are stored in: \$XDG_DATA_HOME/love/${MY_PN}/AI/"
 	elog "e.g., ~/.local/share/love/${MY_PN}/AI/"
-
-	gnome2_icon_cache_update
-}
-
-pkg_postrm() {
-	gnome2_icon_cache_update
 }
