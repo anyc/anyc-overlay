@@ -18,6 +18,11 @@ IUSE=""
 
 S="${WORKDIR}/${PN}"
 
+DEPEND="
+	sys-libs/ncurses
+	sys-process/numactl
+	"
+
 src_prepare() {
 	epatch "${FILESDIR}"/Makefile-std-variables.patch
 }
