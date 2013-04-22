@@ -18,7 +18,6 @@ LICENSE="trainsported DoWhatTheFuckYouWant UbuntuFontLicense-1.0"
 
 if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/Germanunkol/${MY_PN}.git"
-	SRC_URI="http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
 	KEYWORDS=""
 else
 	SRC_URI="http://trainsportedgame.no-ip.org/download/${MY_PN}${PV}.love -> ${PN}.zip
@@ -48,9 +47,14 @@ src_install() {
 	doins -r *
 	rm -f "${D}"/*.html "${D}"/*.md "${D}"/*.txt || die
 
-	doicon "${DISTDIR}/trainsported.png"
 	games_make_wrapper ${PN} "love ${GAMES_DATADIR}/love/${PN}"
-	make_desktop_entry ${PN} ${MY_PN}
+	if [[ "${PV}" == "9999" ]]; then
+		newicon "${WORKDIR}/Icon.ico" trainsported.ico
+		make_desktop_entry ${PN} ${MY_PN} /usr/share/pixmaps/trainsported.ico
+	else
+		doicon "${DISTDIR}"/trainsported.png
+		make_desktop_entry ${PN} ${MY_PN}
+	fi
 
 	prepgamesdirs
 }
