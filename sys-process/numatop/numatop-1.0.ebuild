@@ -34,4 +34,6 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" prefix=/usr install
+	
+	dodoc README AUTHORS
 }
