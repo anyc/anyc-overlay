@@ -29,7 +29,7 @@ src_prepare() {
 
 src_compile() {
 	# $(LD)=ld fails with default LDFLAGS
-	emake LD=gcc
+	emake LD=$(tc-getCC)
 }
 
 src_install() {
