@@ -4,17 +4,17 @@
 
 EAPI=5
 
-inherit git-2
-
 DESCRIPTION="Simplifies access to RAPL values in modern Intel CPUs"
 HOMEPAGE="http://github.com/anyc/librapl"
-EGIT_REPO_URI="http://github.com/anyc/librapl.git"
+SRC_URI="http://github.com/anyc/librapl/archive/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 IUSE="tools"
+
+S=${WORKDIR}/${PN}-${P}/
 
 src_compile() {
 	default
