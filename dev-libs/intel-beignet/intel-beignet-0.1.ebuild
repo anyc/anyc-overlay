@@ -20,7 +20,12 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+
+if [[ "${PV}" == "9999" ]]; then
+	KEYWORDS=""
+else
+	KEYWORDS="~amd64 ~x86"
+fi
 
 DEPENDS=">=sys-devel/gcc-4.6"
 RDEPENDS="
