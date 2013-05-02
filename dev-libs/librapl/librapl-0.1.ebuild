@@ -23,6 +23,6 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" prefix=/usr/ install
-	use tools && emake -C tools DESTDIR="${D}" prefix=/usr/ install
+	emake DESTDIR="${D}" prefix=/usr install
+	use tools && emake -C tools DESTDIR="${D}" prefix=/usr install
 }
