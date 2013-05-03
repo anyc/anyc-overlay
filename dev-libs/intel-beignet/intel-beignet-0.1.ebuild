@@ -31,6 +31,7 @@ DEPENDS=">=sys-devel/gcc-4.6"
 RDEPENDS="
 	app-admin/eselect-opencl
 	media-libs/mesa
+	sys-devel/clang
 	>=sys-devel/llvm-3.1
 	x11-libs/libdrm
 	x11-libs/libXext
