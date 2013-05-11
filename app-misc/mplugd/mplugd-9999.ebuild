@@ -13,7 +13,10 @@ EGIT_REPO_URI="https://github.com/anyc/mplugd.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="pulseaudio X udev"
 
-RDEPEND="dev-python/dbus-python
-	dev-python/python-xlib"
+RDEPEND="
+	pulseaudio? ( dev-python/dbus-python )
+	X? ( dev-python/python-xlib )
+	udev? ( dev-python/pyudev )
+	"
