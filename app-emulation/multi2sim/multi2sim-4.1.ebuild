@@ -8,7 +8,7 @@ DESCRIPTION="A CPU-GPU Simulator for Heterogeneous Computing"
 HOMEPAGE="http://www.multi2sim.org"
 SRC_URI="http://www.multi2sim.org/files/${P}.tar.gz"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
@@ -21,4 +21,11 @@ src_configure() {
 	econf \
 		$(use_enable gtk) \
 		$(use_enable opengl)
+}
+
+src_install() {
+	# installs conflicting libraries, moving into own directory
+	emake DESTDIR="${D}" libdir=/usr/lib/m2s/ install
+
+	dodoc AUTHORS ChangeLog NEWS README TODO
 }
