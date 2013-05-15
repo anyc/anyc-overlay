@@ -6,7 +6,7 @@ EAPI=5
 
 inherit systemd
 
-DESCRIPTION="This is a sample skeleton ebuild file"
+DESCRIPTION="Thermal daemon for Intel architectures"
 HOMEPAGE="https://01.org/linux-thermal-daemon"
 SRC_URI="http://github.com/01org/thermal_daemon/raw/master/rpms/thermal_daemon-${PV}.tar.gz"
 
