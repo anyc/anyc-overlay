@@ -11,7 +11,7 @@ HOMEPAGE="http://www.freetype.org/"
 SRC_URI="mirror://sourceforge/freetype/${P/_/}.tar.bz2
 	utils?	( mirror://sourceforge/freetype/ft2demos-${PV}.tar.bz2 )
 	doc?	( mirror://sourceforge/freetype/${PN}-doc-${PV}.tar.bz2 )
-	infinality? ( http://dev.gentoo.org/~polynomial-c/${PN}-2.4.11-infinality-patches.tar.xz )"
+	infinality? ( http://www.infinality.net/fedora/linux/zips/freetype-infinality-${PV}-20130514_01-x86_64.tar.bz2 )"
 
 LICENSE="|| ( FTL GPL-2+ )"
 SLOT="2"
@@ -43,6 +43,14 @@ src_prepare() {
 			|| die "unable to disable option $1"
 	}
 
+	if use infinality; then
+		epatch "${WORKDIR}"/freetype-entire-infinality-patchset-20130514-01.patch	
+
+		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in
+		# freetype-2.4.11
+		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
+	fi
+
 	if ! use bindist; then
 		# See http://freetype.org/patents.html
 		# ClearType is covered by several Microsoft patents in the US
@@ -61,15 +69,6 @@ src_prepare() {
 	if use debug; then
 		enable_option FT_DEBUG_LEVEL_TRACE
 		enable_option FT_DEBUG_MEMORY
-	fi
-
-	if use infinality; then
-		epatch "${WORKDIR}"/patches/freetype-enable-subpixel-hinting-infinality.patch
-		epatch "${WORKDIR}"/patches/freetype-entire-infinality-patchset.patch
-
-		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in
-		# freetype-2.4.11
-		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
 
 	epatch "${FILESDIR}"/${PN}-2.3.2-enable-valid.patch
