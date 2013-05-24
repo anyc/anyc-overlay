@@ -63,7 +63,7 @@ src_prepare() {
 	fi
 
 	if use adobe-cff; then
-		epatch ${FILESDIR}/freetype-2.4.12-set-cff-hinting-as-default.patch
+		epatch ${FILESDIR}/freetype-2.4.12-set-adobe-cff-hinting-as-default.patch
 	fi
 
 	if use debug; then
