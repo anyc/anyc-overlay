@@ -6,16 +6,17 @@ EAPI=5
 
 inherit qt4-r2
 
-DESCRIPTION="This is a sample skeleton ebuild file"
-HOMEPAGE="http://foo.example.org/"
+DESCRIPTION="Graphical wireless scanning for Linux "
+HOMEPAGE="http://sourceforge.net/projects/linssid/"
 SRC_URI="http://downloads.sourceforge.net/${PN}/${PN}_${PV}.orig.tar.gz"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
+	dev-libs/boost
 	dev-qt/qtgui:4
 	net-wireless/wireless-tools
 	>=x11-libs/qwt-6
@@ -40,4 +41,10 @@ src_prepare() {
 	# fix QA warnings
 	sed -i "s/Version=.*//" linssid.desktop || die
 	sed -i "s/Categories=.*/Categories=Network;/" linssid.desktop || die
+}
+
+pkg_postinst() {
+	elog "This package parses the output of "iw" and needs root privileges"
+	elog "to do so. You can either start it as root or set up sudo"
+	elog "rights (recommended)."
 }
