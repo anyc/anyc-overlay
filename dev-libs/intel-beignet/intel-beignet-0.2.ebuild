@@ -11,7 +11,7 @@ fi
 inherit cmake-utils $MY_INHERIT
 
 DESCRIPTION="The Beignet GPGPU System for Intel Ivybridge GPUs"
-HOMEPAGE="http://cgit.freedesktop.org/beignet/tree/README.md"
+HOMEPAGE="http://wiki.freedesktop.org/www/Software/Beignet/"
 if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="git://anongit.freedesktop.org/beignet"
 else
