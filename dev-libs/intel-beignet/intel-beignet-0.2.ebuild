@@ -40,7 +40,7 @@ RDEPENDS="
 
 src_unpack() {
 	if [[ "${PV}" != "9999" ]]; then
-		cmake-utils_src_unpack
+		unpack ${A}
 		mv "${WORKDIR}"/* "${S}"
 	else
 		git-2_src_unpack
