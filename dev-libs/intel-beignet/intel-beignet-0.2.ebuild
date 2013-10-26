@@ -4,19 +4,14 @@
 
 EAPI=5
 
-if [[ "${PV}" == "9999" ]]; then
-	MY_INHERIT=git-2
-fi
-
-inherit cmake-utils $MY_INHERIT
+inherit cmake-utils git-2
 
 DESCRIPTION="The Beignet GPGPU System for Intel Ivybridge GPUs"
 HOMEPAGE="http://wiki.freedesktop.org/www/Software/Beignet/"
-if [[ "${PV}" == "9999" ]]; then
-	EGIT_REPO_URI="git://anongit.freedesktop.org/beignet"
-else
-	SRC_URI="http://cgit.freedesktop.org/beignet/snapshot/Release_v${PV}.tar.gz -> ${P}.tar.gz"
-fi
+
+# we cannot use the snapshots as the checksum changes for every download
+EGIT_REPO_URI="git://anongit.freedesktop.org/beignet"
+EGIT_COMMIT="Release_v${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -37,15 +32,6 @@ RDEPENDS="
 	x11-libs/libXext
 	x11-libs/libXfixes
 	"
-
-src_unpack() {
-	if [[ "${PV}" != "9999" ]]; then
-		unpack ${A}
-		mv "${WORKDIR}"/* "${S}"
-	else
-		git-2_src_unpack
-	fi
-}
 
 src_prepare() {
 	# disable tests for now
