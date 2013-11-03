@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit systemd
+inherit systemd autotools
 
 DESCRIPTION="Thermal daemon for Intel architectures"
 HOMEPAGE="https://01.org/linux-thermal-daemon"
-SRC_URI="http://github.com/01org/thermal_daemon/raw/master/rpms/thermal_daemon-${PV}.tar.gz"
+SRC_URI="https://github.com/01org/thermal_daemon/archive/v${PV}.tar.gz -> thermal_daemon-${PV}.tar.gz"
 
 LICENSE="GPL2"
 SLOT="0"
@@ -19,6 +19,10 @@ S=${WORKDIR}/thermal_daemon-${PV}
 
 DEPEND="dev-libs/dbus-glib
 	dev-libs/libxml2"
+
+src_prepare() {
+	eautoreconf
+}
 
 src_configure() {
 	econf --with-systemdsystemunitdir=$(systemd_get_unitdir)
