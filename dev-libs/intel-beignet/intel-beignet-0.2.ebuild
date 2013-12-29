@@ -22,8 +22,8 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-DEPENDS=">=sys-devel/gcc-4.6"
-RDEPENDS="
+DEPEND=">=sys-devel/gcc-4.6"
+RDEPEND="
 	app-admin/eselect-opencl
 	media-libs/mesa
 	sys-devel/clang
