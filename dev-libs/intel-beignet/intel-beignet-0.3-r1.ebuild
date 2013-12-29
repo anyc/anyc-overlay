@@ -39,7 +39,7 @@ src_prepare() {
 	# disable tests for now
 	sed -i "s/ADD_SUBDIRECTORY(utests)/#ADD_SUBDIRECTORY(utests)/" CMakeLists.txt || die "sed failed"
 
-	echo "/usr/lib64/OpenCL/vendors/intel-beignet/libcl.so" > intelbeignet.icd
+	echo "/usr/$(get_libdir)/OpenCL/vendors/intel-beignet/libcl.so" > intelbeignet.icd
 
 	cmake-utils_src_prepare
 }
