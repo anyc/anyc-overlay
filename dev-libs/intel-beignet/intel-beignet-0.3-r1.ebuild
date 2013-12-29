@@ -41,6 +41,9 @@ src_prepare() {
 
 	echo "/usr/$(get_libdir)/OpenCL/vendors/intel-beignet/libcl.so" > intelbeignet.icd
 
+	# use system OpenCL headers but keep cl_intel.h extension
+	rm -rf include/CL/{cl.h,cl.hpp,cl_d3d10.h,cl_ext.h,cl_gl.h,cl_gl_ext.h,cl_platform.h,opencl.h}
+
 	cmake-utils_src_prepare
 }
 
