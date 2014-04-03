@@ -13,7 +13,7 @@ SRC_URI="http://downloads.syncevolution.org/syncevolution/sources/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="akonadi bluetooth curl dbus eds gnome gtk2 gtk3 keyring kwallet libnotify mlite soup sqlite webdav xmlrpc"
+IUSE="akonadi bluetooth curl dbus eds gnome gtk2 gtk3 keyring kwallet libnotify soup sqlite webdav xmlrpc"
 
 RDEPEND="
 	>=dev-libs/boost-1.35

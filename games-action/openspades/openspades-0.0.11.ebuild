@@ -4,12 +4,12 @@
 
 EAPI=5
 
-inherit cmake-utils
+inherit cmake-utils versionator toolchain-funcs
 
 DESCRIPTION="OpenSpades is a clone of Voxlap Ace of Spades 0.75"
 HOMEPAGE="http://github.com/yvt/openspades"
 SRC_URI="https://github.com/yvt/openspades/archive/v${PV}.tar.gz
-		https://github.com/yvt/openspades/releases/download/v${PV}/OpenSpades-${PV}-Windows-msvc.zip"
+		https://github.com/yvt/openspades/releases/download/v${PV}/OpenSpades-${PV}-Windows-winxp.zip"
 
 IUSE=""
 LICENSE="GPL-3"
@@ -17,7 +17,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="
-	media-libs/libsdl
+	>=sys-devel/gcc-4.8
+	>=media-libs/libsdl2-2.0.2
+	media-libs/sdl2-image
 	net-misc/curl
 	virtual/opengl
 	x11-libs/fltk
@@ -32,20 +34,22 @@ src_unpack() {
 src_prepare() {
 	# fix build error, maybe related to https://bugs.gentoo.org/show_bug.cgi?id=383179
 	epatch "${FILESDIR}/openspades-zlib.patch"
-	
-	mv ${WORKDIR}/OpenSpades-0.0.9-Windows-msvc/Resources/pak002-Models.pak \
-		${WORKDIR}/OpenSpades-0.0.9-Windows-msvc/Resources/pak001-Models.pak
-	
-	mv ${WORKDIR}/OpenSpades-0.0.9-Windows-msvc/Resources/pak001-Sounds.pak \
-		${WORKDIR}/OpenSpades-0.0.9-Windows-msvc/Resources/pak002-Sounds.pak
 }
 
 
 src_configure() {
+	local ver=4.8.0
+	local msg="${PN} needs at least GCC ${ver} set to compile."
+
+	if ! version_is_at_least ${ver} $(gcc-fullversion); then
+		eerror ${msg}
+		die ${msg}
+	fi
+
 	# install to /opt as it keeps everything under one directory
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX=/opt/${PN}
-		-DOPENSPADES_RESDIR:STRING=${WORKDIR}/OpenSpades-0.0.9-Windows-msvc/Resources/
+		-DOPENSPADES_RESDIR:STRING=${WORKDIR}/OpenSpades-${PV}-Windows/Resources/
 	)
 	cmake-utils_src_configure
 }
