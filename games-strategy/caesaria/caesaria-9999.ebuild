@@ -49,7 +49,7 @@ src_install() {
 	echo -e "#!/bin/sh\n\ncaesaria.linux -R ${MY_DATADIR}" > caesaria
 
 	dogamesbin caesaria
-	dogamesbin source/caesaria.linux
+	dogamesbin ${WORKDIR}/caesaria-test/caesaria.linux
 
 	dodoc docs/*
 
