@@ -53,6 +53,8 @@ src_install() {
 
 	dodoc docs/*
 
+	keepdir "${MY_DATADIR}/resources/"
+
 	prepgamesdirs
 }
 
