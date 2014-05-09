@@ -15,20 +15,22 @@ HOMEPAGE="https://bitbucket.org/dalerank/caesaria"
 
 if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://bitbucket.org/dalerank/caesaria.git"
-	KEYWORDS=""
 else
-	SRC_URI="https://bitbucket.org/dalerank/caesaria/get/stable.tar.gz"
-	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://bitbucket.org/dalerank/caesaria/get/35f1851.tar.gz -> ${PF}.tar.gz"
 fi
 
 
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
+IUSE="sgreader"
 
 DEPEND="media-libs/libsdl
 	media-libs/libpng
 	media-libs/sdl-ttf
 	media-libs/sdl-mixer
+
+	sgreader? ( x11-libs/libqxt )
 	"
 RDEPEND="${DEPEND}"
 
@@ -49,6 +51,10 @@ src_prepare() {
 
 	# disable updater
 	sed -i "s/add_subdirectory(updater updater)//g" CMakeLists.txt || die
+
+	if use sgreader; then
+		echo "add_subdirectory(sgreader sgreader)" >> CMakeLists.txt
+	fi
 }
 
 src_configure() {
@@ -70,6 +76,8 @@ src_install() {
 
 	dogamesbin caesaria
 	dogamesbin ${WORKDIR}/caesaria-test/caesaria.linux
+
+	use sgreader && dogamesbin ${BUILD_DIR}/sgreader/sgreader
 
 	dodoc docs/*
 
