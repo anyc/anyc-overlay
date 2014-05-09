@@ -20,7 +20,7 @@ if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/Germanunkol/${MY_PN}.git"
 	KEYWORDS=""
 else
-	SRC_URI="http://trainsportedgame.no-ip.org/download/${MY_PN}${PV}.love -> ${PN}.zip
+	SRC_URI="http://trainsportedgame.no-ip.org/download/${MY_PN}${PV}.love -> ${P}.zip
 		http://media.indiedb.com/images/games/1/22/21584/Icon.png -> trainsported.png"
 	KEYWORDS="~amd64 ~x86"
 fi
@@ -36,7 +36,7 @@ src_unpack() {
 		EGIT_NOUNPACK=1
 		git-2_src_unpack
 	else
-		unpack ${PN}.zip
+		unpack ${P}.zip
 	fi
 }
 
