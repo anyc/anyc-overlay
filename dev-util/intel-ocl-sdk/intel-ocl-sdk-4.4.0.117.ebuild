@@ -12,7 +12,7 @@ SRC_URI="intel_sdk_for_ocl_applications_2014_ubuntu_${PV}_x64.tgz"
 
 LICENSE="Intel-SDP"
 SLOT="0"
-IUSE="android bundled_libs"
+IUSE="android +bundled_libs"
 KEYWORDS="-* ~amd64"
 RESTRICT="fetch mirror"
 
@@ -37,9 +37,9 @@ src_unpack() {
 	default
 
 	PKGS="base devel intel-cpu intel-devel"
-	
+
 	use android && PKGS="$PKGS intel-devel-android"
-	
+
 	for PKG in ${PKGS}; do
 		FILENAME="opencl-1.2-${PKG}-4.4.0.117-1.x86_64.deb"
 		einfo "Extracting \"${FILENAME}\"..."
@@ -66,7 +66,8 @@ src_install() {
 	insopts -m 755
 	doins ${WORKDIR}/${INTEL_CL}/lib64/*
 
-	insinto /${INTEL_CL}/lib64
+	insinto /${INTEL_CL}/bin
+	insopts -m 755
 	doins ${WORKDIR}/${INTEL_CL}/bin/*
 
 	# TODO put this somewhere
