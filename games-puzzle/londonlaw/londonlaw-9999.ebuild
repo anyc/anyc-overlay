@@ -21,11 +21,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE="dedicated"
 
 DEPEND="dev-python/twisted[${PYTHON_USEDEP}]
-	dev-python/wxpython:3.0[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]
+
+	!dedicated? ( dev-python/wxpython:3.0[${PYTHON_USEDEP}] )
 	${PYTHON_DEPS}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
 
 src_prepare() {
 	if use dedicated ; then
