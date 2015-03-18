@@ -9,7 +9,8 @@ start() {
 	start-stop-daemon --start --pidfile /var/run/london-server.pid \
 		--user GAMES_USER_DED --background --stdout GAMES_LOGDIR/PN.log \
 		--stderr GAMES_LOGDIR/PN.log --make-pidfile \
-		--exec GAMES_BINDIR/london-server -- -p $LONDONLAW_PORT
+		--exec GAMES_BINDIR/london-server -- -p $LONDONLAW_PORT \
+		--dbdir $LONDONLAW_DBDIR
 	eend $?
 }
 

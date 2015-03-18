@@ -5,14 +5,18 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python-single-r1 games git-r3
+if [ "${PV}" == "9999" ]; then
+	MY_INHERIT=git-r3
+fi
+
+inherit eutils python-single-r1 games $MY_INHERIT
 
 DESCRIPTION="Clone of the famous Scotland Yard board game"
 HOMEPAGE="http://pessimization.com/software/londonlaw/"
 if [ "${PV}" == "9999" ]; then
 	EGIT_REPO_URI=https://github.com/anyc/londonlaw.git
 else
-	SRC_URI=""
+	SRC_URI="https://github.com/anyc/londonlaw/archive/v${PV}.tar.gz"
 fi
 
 LICENSE="GPL-2"
@@ -20,7 +24,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="dedicated"
 
-DEPEND="dev-python/twisted[${PYTHON_USEDEP}]
+DEPEND="dev-python/twisted-core[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]
 
 	!dedicated? ( dev-python/wxpython:3.0[${PYTHON_USEDEP}] )
@@ -48,9 +52,10 @@ src_prepare() {
 			"${FILESDIR}/${f}" > "${T}/${f}" \
 			|| die "sed failed"
 	done
+
 	sed -i \
-		-e "/serverdata/ s:\"$:\"\n      dbDir = \"${GAMES_STATEDIR}/${PN}\":" \
-		londonlaw/server/GameRegistry.py \
+		-e "s:^LONDONLAW_DBDIR=.*$:LONDONLAW_DBDIR=${GAMES_STATEDIR}/${PN}:" \
+		"${T}/londonlaw.confd" \
 		|| die "sed failed"
 
 	python_fix_shebang .
@@ -63,16 +68,22 @@ src_install() {
 		--install-lib=$(python_get_sitedir) \
 		--install-data="${GAMES_DATADIR}" \
 		|| die "install failed"
+
 	dodoc doc/ChangeLog README.md doc/TODO doc/manual.tex doc/readme.protocol
 	dohtml doc/manual.html
 
 	newinitd "${T}/londonlaw.rc" londonlaw
 	newconfd "${T}/londonlaw.confd" londonlaw
-	keepdir "${GAMES_STATEDIR}/${PN}"
+
 	dodir "${GAMES_LOGDIR}"
 	touch "${D}/${GAMES_LOGDIR}"/${PN}.log
+
+	keepdir "${GAMES_STATEDIR}/${PN}"
 	fowners ${GAMES_USER_DED}:${GAMES_GROUP} \
 		"${GAMES_STATEDIR}/${PN}" "${GAMES_LOGDIR}"/${PN}.log
+
+	fperms ug+rwx "${GAMES_STATEDIR}/${PN}"
+	fperms ug+rw "${GAMES_LOGDIR}"/${PN}.log
 
 	prepgamesdirs
 }
