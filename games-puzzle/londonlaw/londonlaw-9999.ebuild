@@ -15,13 +15,14 @@ DESCRIPTION="Clone of the famous Scotland Yard board game"
 HOMEPAGE="http://pessimization.com/software/londonlaw/"
 if [ "${PV}" == "9999" ]; then
 	EGIT_REPO_URI=https://github.com/anyc/londonlaw.git
+	KEYWORDS=""
 else
 	SRC_URI="https://github.com/anyc/londonlaw/archive/v${PV}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 IUSE="dedicated"
 
 DEPEND="dev-python/twisted-core[${PYTHON_USEDEP}]
