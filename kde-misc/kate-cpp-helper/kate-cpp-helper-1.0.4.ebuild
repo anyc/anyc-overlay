@@ -17,7 +17,7 @@ SLOT="4"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="
-	$(add_kdebase_dep kate)
+	$(add_kdeapps_dep kate)
 
 	>=dev-libs/boost-1.49
 	>=dev-libs/xapian-1.2.12
