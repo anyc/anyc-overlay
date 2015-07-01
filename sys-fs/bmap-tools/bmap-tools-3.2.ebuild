@@ -6,7 +6,6 @@ EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 
-#inherit python-single-r1
 inherit distutils-r1
 
 DESCRIPTION="Create and apply sparse images of block devices"
