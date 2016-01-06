@@ -4,22 +4,27 @@
 
 EAPI=5
 
-inherit git-r3
+if [ "${PV}" == "9999" ]; then
+	inherit git-r3
+fi
 
 DESCRIPTION="Frame-accurate video cutting with only small quality loss"
 HOMEPAGE="http://github.com/anyc/avcut.git"
-EGIT_REPO_URI="https://github.com/anyc/avcut.git"
+if [ "${PV}" == "9999" ]; then
+	EGIT_REPO_URI="https://github.com/anyc/avcut.git"
+else
+	SRC_URI="https://github.com/anyc/avcut/archive/v${PV}.tar.gz"
+fi
 LICENSE="GPL-2"
 SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=""
+RDEPEND="media-video/ffmpeg"
 DEPEND="${RDEPEND}"
-
-DOCS=( README )
 
 src_install() {
 	dobin avcut
+	dodoc README.md
 }
