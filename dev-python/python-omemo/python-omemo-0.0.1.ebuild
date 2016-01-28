@@ -24,5 +24,6 @@ DEPEND="${PYTHON_DEPS}
 RDEPEND="${DEPEND}"
 
 src_prepare() {
+	# apply patch from bundled python-omemo in net-im/gajim-omemo
 	epatch "${FILESDIR}/detect_own_devices.patch"
 }

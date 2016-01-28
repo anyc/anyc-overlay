@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# based on the ebuild of the flow overlay
+# based on the ebuild from flow overlay
 
 EAPI=6
 
@@ -35,7 +35,9 @@ RDEPEND="${DEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_install() {
+	# use "omemo_enc" in order to avoid name collision with python-omemo
 	local PLUGINDIR="/usr/share/gajim/plugins/omemo_enc"
+
 	dodoc CHANGELOG README.md
 
 	insinto "${PLUGINDIR}"
