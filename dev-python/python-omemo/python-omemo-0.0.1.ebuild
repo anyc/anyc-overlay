@@ -20,7 +20,7 @@ IUSE=""
 DEPEND="${PYTHON_DEPS}
 	>=dev-libs/protobuf-2.6[python]
 	>=dev-python/pycrypto-2.6.1[${PYTHON_USEDEP}]
-	>=dev-python/python-axolotl-0.1.6[${PYTHON_USEDEP}]"
+	dev-python/axolotl[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
