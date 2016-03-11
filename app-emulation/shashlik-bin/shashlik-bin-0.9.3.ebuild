@@ -1,0 +1,1 @@
+shashlik-bin-0.9.2.ebuild
