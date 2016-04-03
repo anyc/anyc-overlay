@@ -9,7 +9,8 @@ inherit cmake-utils versionator toolchain-funcs
 DESCRIPTION="OpenSpades is a clone of Voxlap Ace of Spades 0.75"
 HOMEPAGE="http://github.com/yvt/openspades"
 SRC_URI="https://github.com/yvt/openspades/archive/v${PV}.tar.gz
-		https://github.com/yvt/openspades/releases/download/v${PV}/OpenSpades-${PV}b-Windows.zip"
+		https://github.com/yvt/openspades/releases/download/v${PV}/OpenSpades-${PV}b-Windows.zip
+		http://yvt.jp/files/programs/osppaks/DevPaks27.zip"
 IUSE=""
 LICENSE="GPL-3"
 SLOT="0"
@@ -33,6 +34,9 @@ src_unpack() {
 src_prepare() {
 	# fix build error, maybe related to https://bugs.gentoo.org/show_bug.cgi?id=383179
 	epatch "${FILESDIR}/openspades-zlib.patch"
+
+	# disable downloading additional files during compilation
+	echo -e "#!/bin/sh\nexit 0" > "${S}"/Resources/downloadpak.sh || die
 }
 
 
@@ -54,6 +58,9 @@ src_configure() {
 }
 
 src_install() {
+	mkdir "${BUILD_DIR}"/Resources/DevPak || die
+	mv "${WORKDIR}"/*.pak "${BUILD_DIR}"/Resources/DevPak/ || die
+
 	into /opt
 	dobin "${FILESDIR}/openspades"
 
