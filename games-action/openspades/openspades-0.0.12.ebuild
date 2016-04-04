@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -51,8 +51,8 @@ src_configure() {
 
 	# install to /opt as it keeps everything under one directory
 	local mycmakeargs=(
-		-DCMAKE_INSTALL_PREFIX=/opt/${PN}
-		-DOPENSPADES_RESDIR:STRING=${WORKDIR}/OpenSpades-${PV}-Windows/Resources/
+		-DOPENSPADES_INSTALL_BINARY=bin
+		-DOPENSPADES_INSTALL_RESOURCES=share/openspades/Resources
 	)
 	cmake-utils_src_configure
 }
@@ -60,9 +60,6 @@ src_configure() {
 src_install() {
 	mkdir "${BUILD_DIR}"/Resources/DevPak || die
 	mv "${WORKDIR}"/*.pak "${BUILD_DIR}"/Resources/DevPak/ || die
-
-	into /opt
-	dobin "${FILESDIR}/openspades"
 
 	cmake-utils_src_install
 }
