@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit distutils
+PYTHON_COMPAT=( python2_7 )
+
+inherit distutils-r1
 
 DESCRIPTION="Library for working with XMP metadata stored in many different file formats"
 HOMEPAGE="http://code.google.com/p/python-xmp-toolkit/"
@@ -18,7 +20,7 @@ IUSE="doc"
 RDEPEND="media-libs/exempi"
 
 src_install() {
-	distutils_src_install
+	distutils-r1_src_install
 
 	use doc && dohtml -r docs/html/*
 }

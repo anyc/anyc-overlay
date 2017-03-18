@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit git-2 distutils
+PYTHON_COMPAT=( python2_7 )
+
+inherit git-2 distutils-r1
 
 DESCRIPTION="Daemon that executes event-triggered actions"
 HOMEPAGE="http://github.com/anyc/mplugd"
