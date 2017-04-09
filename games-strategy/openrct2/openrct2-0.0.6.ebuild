@@ -38,16 +38,6 @@ REQUIRED_USE="multiplayer? ( twitch )"
 
 S="${WORKDIR}/OpenRCT2-${PV}"
 
-#src_prepare() {
-#	sed -i 's/-Werror //' CMakeLists.txt
-#
-#	default
-#}
-
-#src_unpack() {
-#	unpack "${P}.tar.gz"
-#}
-
 src_prepare() {
 	sed -i "/^install(CODE \"file(DOWNLOAD/d" CMakeLists.txt || die
 
@@ -70,4 +60,11 @@ src_install() {
 	mv "${DISTDIR}/${PN}-title-sequences-0.0.5.zip" "${D}/usr/share/${PN}/title/title-sequences.zip" || die
 
 	cmake-utils_src_install
+}
+
+pkg_postinst() {
+	elog "Please note, you still need some of the original game assets"
+	elog "to play this game. See:"
+	elog ""
+	elog "https://github.com/OpenRCT2/OpenRCT2/wiki/Required-RCT2-files"
 }
