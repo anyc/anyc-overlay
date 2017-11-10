@@ -55,17 +55,17 @@ src_install() {
 	doexe $BINS || die
 
 	P_NUMBER=$(( $(printf "%d" "'$(get_version_component_range get_last_version_component_index)") - 96 ))
-	exeinto ${INSTALLDIR}/lib
+	exeinto ${INSTALLDIR}
 
 	for SUFFIX in "" _x86; do
 		doexe "libjlinkarm${SUFFIX}.so.${PV/[a-z]/}.${P_NUMBER}" || die
-		dosym "libjlinkarm${SUFFIX}.so.${PV/[a-z]/}.${P_NUMBER}" "${INSTALLDIR}/lib/libjlinkarm${SUFFIX}.so.$(get_major_version)" || die
-		dosym "libjlinkarm${SUFFIX}.so.$(get_major_version)" "${INSTALLDIR}/lib/libjlinkarm${SUFFIX}.so" || die
+		dosym "libjlinkarm${SUFFIX}.so.${PV/[a-z]/}.${P_NUMBER}" "${INSTALLDIR}/libjlinkarm${SUFFIX}.so.$(get_major_version)" || die
+		dosym "libjlinkarm${SUFFIX}.so.$(get_major_version)" "${INSTALLDIR}/libjlinkarm${SUFFIX}.so" || die
 	done
 
 	doexe GDBServer/*
 
-	insinto ${INSTALLDIR}/lib
+	insinto ${INSTALLDIR}
 	doins -r x86 || die
 
 	insinto ${INSTALLDIR}/doc
