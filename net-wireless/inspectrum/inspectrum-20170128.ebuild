@@ -22,7 +22,7 @@ RDEPEND="sci-libs/fftw:3.0=
 	dev-qt/qtcore:5
 	dev-qt/qtconcurrent:5
 	net-wireless/gnuradio:=
-	net-wireless/liquid-dsp"
+	|| ( net-wireless/liquid-dsp net-libs/liquid-dsp )"
 DEPEND="virtual/pkgconfig
 	${RDEPEND}"
 

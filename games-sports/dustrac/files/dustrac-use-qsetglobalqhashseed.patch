@@ -1,0 +1,35 @@
+From 1b0f7f2b75e5c6458f2b36952b9f4f4151eff5a3 Mon Sep 17 00:00:00 2001
+From: Pino Toscano <toscano.pino@tiscali.it>
+Date: Thu, 28 Dec 2017 11:37:05 +0100
+Subject: [PATCH] Editor: use qSetGlobalQHashSeed with Qt 5.6+
+
+qt_qhash_seed is no more exported in recent Qt 5.9.x versions, so use
+the public functions for it available since Qt 5.6.
+
+Fixes commit 8b6ea072e46c2b689ba8b851c60e20864037893d.
+---
+ src/editor/main.cpp | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/editor/main.cpp b/src/editor/main.cpp
+index 3090551e..15e69e81 100644
+--- a/src/editor/main.cpp
++++ b/src/editor/main.cpp
+@@ -25,10 +25,17 @@
+ #include <memory>
+ #include <cstdlib>
+ 
++#if QT_VERSION < 0x50600
+ extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
++#endif
++
+ int main(int argc, char ** argv)
+ {
++#if QT_VERSION >= 0x50600
++    qSetGlobalQHashSeed(0);
++#else
+     qt_qhash_seed.store(0);
++#endif
+ 
+     QApplication::setOrganizationName(Config::Common::QSETTINGS_COMPANY_NAME);
+     QApplication::setApplicationName(Config::Editor::QSETTINGS_SOFTWARE_NAME);
