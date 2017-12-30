@@ -1,12 +1,13 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 inherit eutils gnome2-utils cmake-utils
 
-DESCRIPTION="Tile-based, cross-platform 2D racing game"
-HOMEPAGE="http://dustrac.sourceforge.net/"
-SRC_URI="https://github.com/juzzlin/DustRacing2D/archive/${PV}.tar.gz -> ${P}.tar.gz"
+DESCRIPTION="Top-down car racing game"
+HOMEPAGE="http://juzzlin.github.io/DustRacing2D/"
+#SRC_URI="https://github.com/juzzlin/DustRacing2D/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/juzzlin/DustRacing2D/archive/7e240803c564c5fe5682d3ca3a4d668ded4b0782.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3+ CC-BY-SA-3.0"
 SLOT="0"
@@ -25,11 +26,6 @@ DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
 	dev-qt/qttest:5
 	virtual/pkgconfig"
-
-PATCHES=(
-	# already upstream, remove with next version
-	"${FILESDIR}"/${PN}-use-qsetglobalqhashseed.patch
-	)
 
 S="${WORKDIR}/DustRacing2D-${PV}"
 
@@ -52,10 +48,6 @@ src_compile() {
 
 src_install() {
 	cmake-utils_src_install
-
-	# FIXME: where should these come from?
-	dosym /usr/share/fonts/ubuntu-font-family/UbuntuMono-B.ttf "/usr/share/${PN}/fonts/UbuntuMono-B.ttf"
-	dosym /usr/share/fonts/ubuntu-font-family/UbuntuMono-R.ttf "/usr/share/${PN}/fonts/UbuntuMono-R.ttf"
 }
 
 pkg_preinst() {
