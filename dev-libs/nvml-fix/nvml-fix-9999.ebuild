@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2
+inherit git-r3
 
 DESCRIPTION="Workaround to enable nvidia-smi for GeForce cards"
 HOMEPAGE="https://github.com/CFSworks/nvml_fix"

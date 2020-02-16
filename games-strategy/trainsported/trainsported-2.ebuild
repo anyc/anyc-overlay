@@ -5,7 +5,7 @@
 EAPI=5
 
 if [[ "${PV}" == "9999" ]]; then
-	MY_INHERIT="git-2"
+	MY_INHERIT="git-r3"
 fi
 
 inherit $MY_INHERIT games

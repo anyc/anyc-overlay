@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2
+inherit git-r3
 
 DESCRIPTION="Simplifies access to RAPL values in modern Intel CPUs"
 HOMEPAGE="http://github.com/anyc/librapl"

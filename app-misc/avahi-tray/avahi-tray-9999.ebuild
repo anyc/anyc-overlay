@@ -6,11 +6,11 @@ EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils distutils-r1 git-2
+inherit eutils distutils-r1 git-r3
 
 DESCRIPTION="An application in the system tray that enables fast access on services announced through Avahi/MDNS"
 HOMEPAGE="https://github.com/anyc/avahi-tray"
-EGIT_REPO_URI="git://github.com/anyc/avahi-tray.git"
+EGIT_REPO_URI="https://github.com/anyc/avahi-tray.git"
 
 SLOT=0
 LICENSE="GPL-2"

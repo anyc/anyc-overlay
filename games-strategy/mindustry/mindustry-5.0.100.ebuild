@@ -11,7 +11,7 @@ DESCRIPTION="Sandbox tower defense game"
 HOMEPAGE="https://mindustrygame.github.io/"
 SRC_URI="https://github.com/Anuken/Mindustry/releases/download/v${BUILDVER}/Mindustry.jar"
 
-LICENSE="GPLv3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
