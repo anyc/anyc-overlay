@@ -34,7 +34,7 @@ S=${WORKDIR}
 src_unpack() {
 	if [[ "${PV}" == "9999" ]]; then
 		EGIT_NOUNPACK=1
-		git-2_src_unpack
+		git-r3_src_unpack
 	else
 		unpack ${P}.zip
 	fi
