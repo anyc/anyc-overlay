@@ -1,22 +1,17 @@
-#!/sbin/runscript
+#!/sbin/openrc-run
+# Copyright 2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="londonlaw daemon"
+description="londonlaw server"
+command=/usr/bin/london-server
+command_args="-p $LONDONLAW_PORT --dbdir $LONDONLAW_DBDIR"
+pidfile="/var/run/london-server.pid"
+command_user=${user:-londonlaw}
+command_group=${group:-londonlaw}
+command_background="true"
+start_stop_daemon_args="--stdout /var/log/londonlaw/london-server.log --stderr /var/log/londonlaw/london-server.log"
 
 depend() {
-	need net
-}
-
-start() {
-	ebegin "Starting londonlaw server"
-	start-stop-daemon --start --pidfile /var/run/london-server.pid \
-		--user GAMES_USER_DED --background --stdout GAMES_LOGDIR/PN.log \
-		--stderr GAMES_LOGDIR/PN.log --make-pidfile \
-		--exec GAMES_BINDIR/london-server -- -p $LONDONLAW_PORT \
-		--dbdir $LONDONLAW_DBDIR
-	eend $?
-}
-
-stop() {
-	ebegin "Stopping londonlaw server"
-	start-stop-daemon --stop --pidfile /var/run/london-server.pid \
-		--exec GAMES_BINDIR/london-server
-	eend $?
+	use net
 }
