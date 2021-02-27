@@ -2,4 +2,4 @@
 LONDONLAW_PORT="7921"
 
 # store game and user database in this directory
-LONDONLAW_DBDIR=
+LONDONLAW_DBDIR=/var/lib/londonlaw
