@@ -1,5 +1,0 @@
-# run londonlaw on port 7921 (default)
-LONDONLAW_PORT="7921"
-
-# store game and user database in this directory
-LONDONLAW_DBDIR=
