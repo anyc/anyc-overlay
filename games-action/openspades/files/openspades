@@ -1,9 +1,0 @@
-#! /bin/sh
-
-PWD=$(pwd)
-
-cd /opt/openspades/bin/
-
-./OpenSpades
-
-cd ${PWD}
